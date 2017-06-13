@@ -55,15 +55,9 @@
         </div>
     </div>
 
-    <div class="container text-center">
-        <ul class="pagination pagination-lg">
-            <li class="disabled"><a href="#">«</a></li>
-            <li class="active"><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li><a href="#">»</a></li>
-        </ul>
+
+
+    <div class="container text-center" *ngIf="totalItems>0">
+        <pagination [totalItems]="totalItems" [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)" class="pagination-lg"></pagination>
     </div>
 </div>

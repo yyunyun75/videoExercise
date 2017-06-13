@@ -15,8 +15,11 @@ export class HomeComponent implements OnInit {
     emojis = EMOJIS;
     userData = USERS;
     currentUser = {};
+    public totalItems: number = 0;
+    public currentPage: number = 0;
 
     videos = [];
+    totalVideos = [];
 
     errorMsg: string;
 
@@ -26,6 +29,12 @@ export class HomeComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+    }
+
+    public pageChanged(event: any): void {
+        let start = (event.page - 1) * event.itemsPerPage;
+        let end = start + event.itemsPerPage;
+        this.videos = this.totalVideos.slice(start, end);
     }
 
     isSelected(emoji, videoId){
@@ -76,7 +85,7 @@ export class HomeComponent implements OnInit {
             this.userData[videoId][emoji]--;
             this.videos = this.videos.map(video=>{
                 if(video.id.videoId == videoId){
-                    video.emojis[emoji] = video.emojis[emoji]--;
+                    video.emojis[emoji] = this.userData[videoId][emoji];
                 }
                 return video;
             });
@@ -99,13 +108,16 @@ export class HomeComponent implements OnInit {
                             .subscribe(
                                 data =>{
                                     //filter out data that does not have videoId
-                                    this.videos = data.filter(video=>video['id'].videoId);
+                                    this.totalVideos = data.filter(video=>video['id'].videoId);
                                     //bundle with user data
-                                    this.videos = this.videos.map(video=>{
+                                    this.totalVideos = this.totalVideos.map(video=>{
                                         let videoId = video['id'].videoId;
                                         video.emojis = this.userData[videoId] ? this.userData[videoId] : {};
                                         return video;
                                     });
+                                    //pagination related
+                                    this.totalItems = this.totalVideos.length;
+                                    this.videos = this.totalVideos.slice(0,10);
                                     //console.log(this.videos);
                                 },
                                 error => this.errorMsg = <any>error

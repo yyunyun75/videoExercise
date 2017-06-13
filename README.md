@@ -2,6 +2,13 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.3.
 
+## Requirements/Steps before build development server
+
+1. Make sure your node version is high enough to run Angular Cli, mine is v6.9.0. You can use [Node Version Manager](https://github.com/creationix/nvm) to have different version of node installed on your machine.
+2. Run `npm install` to install all the node packages
+3. Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+4. Please search the keyword 'surf', some of the videos I have dummy user data set in file '/src/app/data/user-data.ts', feel free to change
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
