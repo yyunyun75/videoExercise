@@ -10,6 +10,9 @@ import { HomeComponent } from './pages/home/home.component';
 //routes
 import { routeConfig } from './app.routes';
 
+//services
+import { YoutubeService } from './services/youtube.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +24,7 @@ import { routeConfig } from './app.routes';
     HttpModule,
     RouterModule.forRoot(routeConfig),
   ],
-  providers: [],
+  providers: [YoutubeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
